@@ -4,6 +4,12 @@
 
 # IronOS - Flexible Soldering iron control Firmware
 
+This is an adapted version for usage with Clang and Meson in ARA.
+The version in this branch builds with gllvm and is currently tested only in a way to get the LLVM IR code.
+For a more adapted version look at the `meson` branch (extended with additional debugging code and a custom version etc.)
+
+## Original README
+
 _This repository was formerly known as TS100, it's the same great code. Just with more supported devices._
 
 Originally conceived as an alternative firmware for the TS100, this firmware has evolved into a complex soldering iron control firmware.
