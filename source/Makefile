@@ -270,9 +270,7 @@ CHECKOPTIONS=		-Wall 				\
 			-Winline			\
 			-Wshadow			\
 			-Wno-unused-parameter \
-			-Wdouble-promotion \
-			-Werror 
-			
+			-Wdouble-promotion
 
 
 CHECKOPTIONS_C=	$(CHECKOPTIONS) -Wbad-function-cast
