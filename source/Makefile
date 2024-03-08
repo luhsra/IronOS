@@ -362,7 +362,7 @@ $(HEXFILE_DIR)/$(model)_%.elf : \
 		Makefile $(LDSCRIPT)
 	@test -d $(@D) || mkdir -p $(@D)
 	@echo Linking $@
-	@$(CPP) $(CXXFLAGS) $(OUT_OBJS_S) $(OUT_OBJS) $(OUT_OBJS_CPP) \
+	$(CPP) $(CXXFLAGS) $(OUT_OBJS_S) $(OUT_OBJS) $(OUT_OBJS_CPP) \
 		$(OUTPUT_DIR)/Core/Gen/Translation.$*.o \
 		$(OUTPUT_DIR)/Core/LangSupport/lang_single.o \
 		$(LIBS) $(LINKER_FLAGS) -o$@ -Wl,-Map=$@.map
@@ -374,7 +374,7 @@ $(HEXFILE_DIR)/$(model)_string_compressed_%.elf : \
 		Makefile $(LDSCRIPT)
 	@test -d $(@D) || mkdir -p $(@D)
 	@echo Linking $@
-	@$(CPP) $(CXXFLAGS) $(OUT_OBJS_S) $(OUT_OBJS) $(OUT_OBJS_CPP) \
+	$(CPP) $(CXXFLAGS) $(OUT_OBJS_S) $(OUT_OBJS) $(OUT_OBJS_CPP) \
 		$(OUTPUT_DIR)/Core/Gen/Translation_brieflz.$*.o \
 		$(OUTPUT_DIR)/Core/LangSupport/lang_single.o \
 		$(LIBS) $(LINKER_FLAGS) -o$@ -Wl,-Map=$@.map
@@ -386,7 +386,7 @@ $(HEXFILE_DIR)/$(model)_font_compressed_%.elf : \
 		Makefile $(LDSCRIPT)
 	@test -d $(@D) || mkdir -p $(@D)
 	@echo Linking $@
-	@$(CPP) $(CXXFLAGS) $(OUT_OBJS_S) $(OUT_OBJS) $(OUT_OBJS_CPP) \
+	$(CPP) $(CXXFLAGS) $(OUT_OBJS_S) $(OUT_OBJS) $(OUT_OBJS_CPP) \
 		$(OUTPUT_DIR)/Core/Gen/Translation_brieflz_font.$*.o \
 		$(OUTPUT_DIR)/Core/LangSupport/lang_single.o \
 		$(LIBS) $(LINKER_FLAGS) -o$@ -Wl,-Map=$@.map
@@ -394,17 +394,17 @@ $(HEXFILE_DIR)/$(model)_font_compressed_%.elf : \
 $(OUT_OBJS): $(OUTPUT_DIR)/%.o : %.c Makefile
 	@test -d $(@D) || mkdir -p $(@D)
 	@echo Compiling ${<}
-	@$(CC) -c $(CFLAGS) $< -o $@
+	$(CC) -c $(CFLAGS) $< -o $@
 
 $(OUTPUT_DIR)/%.o : %.cpp Makefile
 	@test -d $(@D) || mkdir -p $(@D)
 	@echo Compiling ${<}
-	@$(CPP) -c $(CXXFLAGS) $< -o $@
+	$(CPP) -c $(CXXFLAGS) $< -o $@
 
 $(OUT_OBJS_S): $(OUTPUT_DIR)/%.o: %.S Makefile
 	@test -d $(@D) || mkdir -p $(@D)
 	@echo 'Building file: $<'
-	@$(AS) -c $(AFLAGS) $< -o $@
+	$(AS) -c $(AFLAGS) $< -o $@
 
 Core/Gen/Translation.%.cpp $(OUTPUT_DIR)/Core/Gen/translation.files/%.pickle: ../Translations/translation_%.json \
 		../Translations/make_translation.py \
