@@ -192,7 +192,7 @@ $(shell find $(DEVICE_BSP_DIR) -type f -name '*.cpp') \
 $(shell find $(SOURCE_MIDDLEWARES_DIR) -type f -name '*.cpp')
 
 # code optimisation ------------------------------------------------------------
-OPTIM=-Os -flto -finline-small-functions -fshort-wchar -findirect-inlining -fdiagnostics-color -ffunction-sections -fdata-sections -fshort-enums -fsingle-precision-constant  -fno-common
+OPTIM=-Os -flto -finline-small-functions -fshort-wchar -fdiagnostics-color -ffunction-sections -fdata-sections -fshort-enums -fsingle-precision-constant  -fno-common
 
 # global defines ---------------------------------------------------------------
 GLOBAL_DEFINES += $(DEV_GLOBAL_DEFS) -D USE_RTOS_SYSTICK -D MODEL_$(model) -D VECT_TAB_OFFSET=$(bootldr_size)U
