@@ -219,13 +219,13 @@ ifeq ($(model),$(ALL_PINE_MODELS))
 COMPILER_PREFIX=riscv-none-elf
 endif
 # programs ---------------------------------------------------------------------
-CC=$(COMPILER_PREFIX)-gcc
-CPP=$(COMPILER_PREFIX)-g++
-OBJCOPY=$(COMPILER_PREFIX)-objcopy
-OBJDUMP=$(COMPILER_PREFIX)-objdump
-SIZE=$(COMPILER_PREFIX)-size
+CC?=$(COMPILER_PREFIX)-gcc
+CPP?=$(COMPILER_PREFIX)-g++
+OBJCOPY?=$(COMPILER_PREFIX)-objcopy
+OBJDUMP?=$(COMPILER_PREFIX)-objdump
+SIZE?=$(COMPILER_PREFIX)-size
 # use gcc in assembler mode so we can use defines etc in assembly
-AS=$(COMPILER_PREFIX)-gcc -x assembler-with-cpp
+AS?=$(COMPILER_PREFIX)-gcc -x assembler-with-cpp
 
 # linker flags -----------------------------------------------------------------
 LINKER_FLAGS=   -Wl,--gc-sections 		                      \
