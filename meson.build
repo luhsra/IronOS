@@ -59,24 +59,10 @@ cflags = common_flags + [
   '-isystem ' + riscv_include_path,
   '-isystem ' + riscv_include_path / 'newlib-nano',
   '-nodefaultlibs',
-  # '-mno-relax'
-  # '-Wl,-plugin-opt=-target-abi=ilp32'
-  # '--rtlib=libgcc',
-  # '--unwindlib=libgcc',
-  # '--specs=nosys.specs',
-  # '-fno-exceptions',
-  # '-ffreestanding',
-  # '-nostdlib',
-  # '-l:crt0.o',
-  # '-l:crti.o',
 ]
 cxxflags = cflags + [
   '-I' + riscv_cxx_dir,
   '-I' + riscv_cxx_dir / riscv_triple / riscv_mode,
-  # '--stdlib=libstdc++',
-  # '-nostdlib++',
-  # '-lstdc++',
-  # '-lsupc++',
 ]
 linkerflags = [
   '-fuse-ld=ld',
