@@ -45,6 +45,8 @@ if not py_with_bdflib.found()
   endif
 endif
 
+# TODO add ARA specific FreeRTOS
+# freertos = subproject('freertos')
 
 riscv_mode = 'rv32imac' / 'ilp32'
 common_flags = [
