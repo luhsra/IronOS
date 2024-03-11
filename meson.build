@@ -98,3 +98,5 @@ ironos_bc = custom_target('ironos-bc',
                      'DEV_AFLAGS=' + ' '.join(aflags) ]
   ],
 )
+
+freertos_config = meson.current_source_dir() / 'source' / 'Core' / 'BSP' / 'Pine64' / 'FreeRTOSConfig.h'
