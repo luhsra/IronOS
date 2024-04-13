@@ -100,3 +100,4 @@ ironos_bc = custom_target('ironos-bc',
 )
 
 freertos_config = meson.current_source_dir() / 'source' / 'Core' / 'BSP' / 'Pine64' / 'FreeRTOSConfig.h'
+va_corrections = files('ironos_map.json')[0]

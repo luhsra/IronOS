@@ -1,0 +1,15 @@
+[
+  {
+    "key": {"call_path":"Callpath([ABB36, __ara_fake_entry -> main], [ABB48, main -> osThreadCreate])","func": "xTaskCreateStatic","inst":"call1","nr":0},
+    "value": {"type": "functionpointer", "name": "startPIDTask"}
+  }, {
+    "key": {"call_path":"Callpath([ABB36, __ara_fake_entry -> main], [ABB49, main -> osThreadCreate])","func": "xTaskCreateStatic","inst":"call1","nr":0},
+    "value": {"type": "functionpointer", "name": "startPOWTask"}
+  }, {
+    "key": {"call_path":"Callpath([ABB36, __ara_fake_entry -> main], [ABB44, main -> osThreadCreate])","func": "xTaskCreateStatic","inst":"call1","nr":0},
+    "value": {"type": "functionpointer", "name": "startMOVTask"}
+  },  {
+    "key": {"call_path":"Callpath([ABB36, __ara_fake_entry -> main], [ABB45, main -> osThreadCreate])","func": "xTaskCreateStatic","inst":"call1","nr":0},
+    "value": {"type": "functionpointer", "name": "startGUITask"}
+  } 
+]
