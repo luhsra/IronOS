@@ -6,9 +6,12 @@ llvm_version = ['>=14', '<15']
 llvm_dep = dependency('llvm', method: 'config-tool', version: llvm_version, include_type: 'system')
 
 toolchains = subproject('toolchains', default_options: {'enable_riscv': 'enabled'})
+assert(toolchains.get_variable('riscv_enabled'), 'IronOS needs a RISC-V toolchain.')
 llvm_bindir = toolchains.get_variable('llvm_bindir')
-llvm_ld = toolchains.get_variable('llvm_ld')
 llvm_objcopy = toolchains.get_variable('llvm_objcopy')
+# TODO llvm_ld does not work here?
+# llvm_ld = toolchains.get_variable('llvm_ld')
+riscv_ld = toolchains.get_variable('riscv_ld')
 
 gcc_riscv_version = toolchains.get_variable('gcc_riscv_version')
 riscv_cxx_dir = toolchains.get_variable('riscv_cxx_dir')
@@ -16,7 +19,7 @@ riscv_triple = toolchains.get_variable('riscv_triple')
 riscv_libgcc_dir = toolchains.get_variable('riscv_libgcc_dir')
 riscv_include_path = toolchains.get_variable('riscv_include_path')
 riscv_link_path = toolchains.get_variable('riscv_link_path')
-# riscv_ld = toolchains.get_variable('riscv_link_path')
+riscv_size = toolchains.get_variable('riscv_size')
 
 py3_mod = import('python')
 py3_inst = py3_mod.find_installation('python3')
@@ -66,9 +69,10 @@ cxxflags = cflags + [
 ]
 linkerflags = [
   '-fuse-ld=ld',
-  '--ld-path=/usr/bin/riscv-none-elf-ld',
+  '--ld-path=@0@'.format(riscv_ld.full_path()),
   '-Wl,--start-group -L' + riscv_link_path / riscv_mode + ' -lc_nano -lm_nano -Wl,--end-group',
   '-Wl,--start-group -L' + riscv_libgcc_dir / riscv_mode + ' -lgcc -Wl,--end-group',
+  '-Wl,-melf32lriscv',
 ]
 
 ironos_build = meson.current_build_dir() / 'ironos_build'
@@ -82,7 +86,7 @@ ironos_bc = custom_target('ironos-bc',
     '--llvm-bindir', llvm_bindir,
     '--make-program', make_tool.full_path(),
     '--get-bc-program', get_bc.full_path(),
-    '--llvm-ld-program', '/usr/bin/riscv-none-elf-ld',
+    '--llvm-ld-program', riscv_ld.full_path(),
     '--llvm-objcopy-program', llvm_objcopy.full_path(),
     '--output', '@OUTPUT0@',
     '--gclang-program', gclang.full_path(),
@@ -91,6 +95,8 @@ ironos_bc = custom_target('ironos-bc',
     '--make-args', [ 'CC=' + gclang.full_path(),
                      'CPP=' + gclang_cpp.full_path(),
                      'AS=' + gclang.full_path(),
+                     'OBJCOPY=' + llvm_objcopy.full_path(),
+                     'SIZE=' + riscv_size.full_path(),
                      'model=Pinecil',
                      'DEV_CFLAGS=' + ' '.join(cflags),
                      'DEV_CXXFLAGS=' + ' '.join(cxxflags),
